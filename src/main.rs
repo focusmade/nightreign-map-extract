@@ -65,7 +65,24 @@ struct Args {
     dump_tiles: bool,
 }
 
-fn main() -> Result<()> {
+fn main() {
+    if let Err(e) = run() {
+        eprintln!("\n  {YELLOW}Error:{RESET} {e:?}");
+    }
+    wait_for_keypress();
+}
+
+fn wait_for_keypress() {
+    #[cfg(target_os = "windows")]
+    {
+        use std::io::{Read, Write};
+        eprint!("  Press Enter to exit...");
+        let _ = std::io::stderr().flush();
+        let _ = std::io::stdin().read(&mut [0u8]);
+    }
+}
+
+fn run() -> Result<()> {
     let args = Args::parse();
     let start = Instant::now();
 
