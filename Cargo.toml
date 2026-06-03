@@ -1,0 +1,24 @@
+[package]
+name = "nightreign-map-extract"
+version = "0.1.0"
+edition = "2021"
+description = "Extract and stitch map tiles from Elden Ring: Nightreign game archives"
+
+[dependencies]
+anyhow = "1"
+byteorder = "1"
+image = { version = "0.25", default-features = false, features = ["png"] }
+libloading = "0.8"
+num-bigint = "0.4"
+num-traits = "0.2"
+base64 = "0.22"
+regex = "1"
+clap = { version = "4", features = ["derive"] }
+rayon = "1"
+indicatif = "0.17"
+image_dds = { version = "0.4", default-features = false, features = ["ddsfile", "image", "decode"] }
+ddsfile = "0.5"
+
+[profile.release]
+opt-level = 3
+lto = true
